@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+<menuitem id="menu_root" name="Census"
+                  web_icon="T_census,static/description/icon.png"
+          sequence="75" groups="base.group_user"  /> <!-- this is the main menu for the module -->
+
+<menuitem name="Census" parent="menu_root"
+          id="main_menu_census" sequence="10" />
+        <!-- Sub menu of the main menu -->
+
+    </data>
+</odoo>

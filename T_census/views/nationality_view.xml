@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_census_entry_filter" model="ir.ui.view">
+            <field name="name">census.entry.search</field>
+            <field name="model">census.entry</field>
+            <field name="arch" type="xml">
+                  <search string="Census">
+                      <field name="id_number" string="By Identification Number"/>
+                      <field name="name" string="By Citizen Name"/>
+                      <separator/>
+                       <filter name ="Male" icon="terp-document-new" domain="[('gender','=','male')]" string="Mens"/>
+                       <filter name ="Female" icon="terp-dolar" domain="[('gender','=','female')]" string="Girls"/>
+                 <group expand="1" string="Group By">
+                        <filter name="Age" string="Age" icon="terp-personal" domain="[]" context="{'group_by':'age'}"/>
+                        <filter name="Working" string="Working" icon="terp-go-month" domain="[]" context="{'group_by':'citizen_state'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+	    
+		                                            <!--Jordainian-->
+
+		<record id="action_jordainian_entry" model="ir.actions.act_window">
+            <field name="name">Jordainian</field>
+            <field name="res_model">census.entry</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="search_view_id" ref="view_census_entry_filter"/>  
+            <field name="domain">[('nationality', '=','jordan')]</field><!-- ('user_id', '=', uid) -->
+            <field name="view_id" ref="view_census_entry_tree"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Jordanian</p>
+            </field>
+         </record>
+
+                                           <!--palestine-->
+
+		<record id="action_palestine_entry" model="ir.actions.act_window">
+            <field name="name">Palestinian</field>
+            <field name="res_model">census.entry</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="search_view_id" ref="view_census_entry_filter"/>  
+            <field name="domain">[('nationality', '=','palestine')]</field><!-- ('user_id', '=', uid) -->
+            <field name="view_id" ref="view_census_entry_tree"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                palestine</p>
+            </field>
+         </record>
+
+                                           
+                                           
+                                           <!--syria-->
+
+		<record id="action_syria_entry" model="ir.actions.act_window">
+            <field name="name">Syrian</field>
+            <field name="res_model">census.entry</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="search_view_id" ref="view_census_entry_filter"/>  
+            <field name="domain">[('nationality', '=','syria')]</field><!-- ('user_id', '=', uid) -->
+            <field name="view_id" ref="view_census_entry_tree"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Syrian</p>
+            </field>
+         </record>
+        		
+
+                                           <!--iraq-->
+
+		<record id="action_iraq_entry" model="ir.actions.act_window">
+            <field name="name">Iraqi</field>
+            <field name="res_model">census.entry</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="search_view_id" ref="view_census_entry_filter"/>  
+            <field name="domain">[('nationality', '=','iraq')]</field><!-- ('user_id', '=', uid) -->
+            <field name="view_id" ref="view_census_entry_tree"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Iraqi</p>
+            </field>
+         </record>
+        		
+
+                                           
+                                    <!--egypt-->           
+
+		<record id="action_egypt_entry" model="ir.actions.act_window">
+            <field name="name">Egyption</field>
+            <field name="res_model">census.entry</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="search_view_id" ref="view_census_entry_filter"/>  
+            <field name="domain">[('nationality', '=','egypt')]</field><!-- ('user_id', '=', uid) -->
+            <field name="view_id" ref="view_census_entry_tree"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Egyption</p>
+            </field>
+         </record>
+
+                                   
+                                   
+                                    <!--libya-->           
+
+		<record id="action_libya_entry" model="ir.actions.act_window">
+            <field name="name">Libyan</field>
+            <field name="res_model">census.entry</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="search_view_id" ref="view_census_entry_filter"/>  
+            <field name="domain">[('nationality', '=','libya')]</field><!-- ('user_id', '=', uid) -->
+            <field name="view_id" ref="view_census_entry_tree"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Libyan</p>
+            </field>
+         </record>
+        		
+
+                                   
+                                   <!--yemen-->           
+
+		<record id="action_yemen_entry" model="ir.actions.act_window">
+            <field name="name">Yemeni</field>
+            <field name="res_model">census.entry</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="search_view_id" ref="view_census_entry_filter"/>  
+            <field name="domain">[('nationality', '=','yemen')]</field><!-- ('user_id', '=', uid) -->
+            <field name="view_id" ref="view_census_entry_tree"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                yemeni</p>
+            </field>
+         </record>
+
+
+    <menuitem name="Nationality" parent="menu_root" id="menu_nationality_view" sequence="1" />
+
+ <menuitem id="menu_jordainian_entry" action="action_jordainian_entry"
+                      parent="menu_nationality_view" name="Jordainian" sequence="1" />
+
+        <menuitem id="menu_palestine_entry" action="action_palestine_entry"
+         parent="menu_nationality_view" name="Palestinian" sequence="2" />
+
+     <menuitem id="menu_syria_entry" action="action_syria_entry"
+         parent="menu_nationality_view" name="Syrian" sequence="3" />
+
+
+          <menuitem id="menu_iraq_entry" action="action_iraq_entry"
+            parent="menu_nationality_view" name="Iraq" sequence="4" />
+
+        <menuitem id="menu_egypt_entry" action="action_egypt_entry"
+          parent="menu_nationality_view" name="Egypt" sequence="5" />
+
+         <menuitem id="menu_libya_entry" action="action_libya_entry"
+          parent="menu_nationality_view" name="libyan" sequence="6" />
+
+         <menuitem id="menu_yemen_entry" action="action_yemen_entry"
+             parent="menu_nationality_view" name="yemeni" sequence="7" />
+
+	</odoo>

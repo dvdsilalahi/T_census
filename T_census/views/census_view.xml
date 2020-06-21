@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+		
+		<record id="view_census_entry_tree" model="ir.ui.view">
+            <field name="name">census.entry.tree</field>
+            <field name="model">census.entry</field>
+            <field name="arch" type="xml">
+		    <tree string="census">
+			<field name="name"/>
+			<field name="id_number"/>
+            <field name="nationality"/>
+            <field name="city"/>
+            <field name="citizen_state"/>
+  		    <field name="age"/>
+			</tree>
+			</field>
+	    </record>
+			
+			
+		<!-- This will be form for census-->	
+		
+		<record id="view_census_entry_form" model="ir.ui.view">
+            <field name="name">census.entry.form</field>
+            <field name="model">census.entry</field>
+            <field name="arch" type="xml">
+            <form string="census">
+            <sheet>
+            
+           <!-- ############################################## -->
+ <div class="oe_title">
+        
+                    <label for="name"  class="oe_edit_only"/>
+                  <h1>
+                     <field name="name"  placeholder=" Person"/>
+                  </h1>
+  <!-- ####################### -->
+                    <label for="id_number"  class="oe_edit_only"/>
+              <h1>
+                    <field name="id_number" placeholder="e.g. Identity Number" />
+               </h1>
+  <!-- ####################### -->
+             <div class="pull-left">
+                    <label for="phone" class="oe_edit_only"/>
+                <h1>
+                    <field name="phone"/>
+                </h1>
+       </div>
+ </div> 
+         <!-- ############################################## -->
+           
+                   <notebook>
+                      <page string="Citizen Info">
+                            <group>
+                                
+                                 <group string="Information">
+                                        <field name="mother_name"  placeholder="e.g.mother first name"/>
+                                        <field name="father_name" placeholder="e.g.father fisrt name"/>
+                                        <field name="fathers_number_related"/>
+                            <field name="mothers_number_related" on_change="onchange_get_mother_name(mothers_number_related,context)"/>
+                                        <field name="gender"/>
+                                        <field name="nationality"/>
+                                        <field name="city"/>  
+                                 </group>
+                                    
+                                 <group string="Citizen Status-Birth">
+                                     <field name="status"/> 
+                                     <field name="children"/>
+                                     <field name="birth_place"/> 
+                                     <field name="birth" on_change="onchange_get_age(birth,context)"/>   
+                                    <field name="age"/>
+ 
+                             <!--         on_change="onchange_get_age(birth,context)"   -->
+                                 </group>
+                                    
+                           </group>
+                       
+                      </page>
+                      
+                    <page string="Citizen Work">
+                            <group>
+                                
+                                 <group string="Home Adress">
+                                        <field name="address"/>
+                                        <field name="street"/>   
+                                 </group>
+                                  
+                                 <group string="Citizen Work - Study">
+                                
+                        <field name="citizen_state"/>
+                        <field name="bachelor" attrs="{'invisible': [('citizen_state','!=','need_job')]}"/>
+                        <field name="your_study" attrs="{'invisible':[('citizen_state','!=','need_job')]}"/>  
+                        <field name="past_job" attrs="{'invisible': [('citizen_state','!=','retired')]}" />
+                        <field name="work" attrs="{'invisible': [('citizen_state','!=','working')]}" />
+                        <field name="work_address" attrs="{'invisible': [('citizen_state','!=','working')]}"/>
+                                    
+          <field name="university" attrs="{'invisible': ['|',('citizen_state','!=','studying'),('school','==',True)]}"/>
+        <field name="university_name" attrs="{'invisible': ['|',('citizen_state','!=','studying'),('school','==',True)]}"/>
+                                     
+             <field name="school" attrs="{'invisible': ['|',('citizen_state','!=','studying'),('university','==',True)]}"/>
+         <field name="school_name" attrs="{'invisible': ['|',('citizen_state','!=','studying'),('university','==',True)]}"/>    
+                                 </group>
+                                    
+                           </group>
+                       
+                      </page>
+                      
+                      <!-- ************************ third Tab ************************************************ -->
+                      
+                      <page string="Citizen Wife" attrs="{'invisible': [('status','!=',True)]}">
+                            <group>
+                                
+                        <field name="wife_ids">
+                           <tree string="census">
+			                       <field name="name"/>
+			                       <field name="id_number"/>
+                                   <field name="nationality"/>
+                                   <field name="city"/>
+                                   <field name="citizen_state"/>
+   		                           <field name="age"/>
+			               </tree>
+                        </field>
+                                  
+                                     
+                           </group>
+                      </page>
+            
+            
+          <!-- ************************ Fourth Tab ************************************************ -->
+                      <page string="Citizen Child" attrs="{'invisible': [('children','!=',True)]}">
+                            <group>
+                                
+                        <field name="child_ids">
+                           <tree string="census">
+			                       <field name="name"/>
+			                       <field name="id_number"/>
+                                   <field name="nationality"/>
+                                   <field name="city"/>
+                                   <field name="citizen_state"/>
+   		                           <field name="age"/>
+			               </tree>
+                        </field>
+                                  
+                                     
+                           </group>
+                    </page>
+                          <!-- ************************************ -->   
+                               
+            </notebook>
+			</sheet>
+			
+	      <div class="oe_chatter">
+                <field name="message_follower_ids" widget="mail_followers"/>
+                <field name="message_ids" widget="mail_thread"/>
+          </div>
+			
+			</form>
+			</field>
+		</record>
+		
+		
+		<!--This will be kanban for census  -->
+		
+<!--		<record id="view_census_entry_kanban"  model="ir.ui.view">-->
+<!--        <field name="name">census.entry.kanban</field>-->
+<!--        <field name="model">census.entry</field>-->
+<!--&lt;!&ndash;        <field name="priority">10</field> &ndash;&gt;-->
+<!--        <field name="arch" type="xml">-->
+<!--            <kanban string="census">-->
+<!--                <templates>-->
+<!--                    <t t-name="kanban-box">-->
+<!--                    <div class="oe_kanban_vignette oe_semantic_html_override">-->
+
+<!--                <a type="open">-->
+<!--                  <img t-att-src='_s + "/base/static/src/img/avatar.png"' class="oe_kanban_image"/>-->
+<!--                </a>-->
+<!--                        -->
+<!--                             <div class="oe_kanban_details">-->
+<!--                                    <h4 class="oe_partner_heading"><a type="open"><field name="name"/></a></h4>-->
+<!--                                    <div class="oe_kanban_partner_categories"/>-->
+<!--                                    <div class="oe_kanban_partner_links"/>-->
+<!--                                    <ul>-->
+<!--                                        -->
+<!--                                    </ul>-->
+<!--                             </div>-->
+<!--                    </div>-->
+<!--                    </t>-->
+<!--                </templates>-->
+<!--            </kanban>-->
+<!--        </field>-->
+<!--        </record>-->
+
+        
+        <!-- ##### Census Filter ##### -->
+
+        <record id="census_entry_view_search" model="ir.ui.view">
+            <field name="name">census.entry.search</field>
+            <field name="model">census.entry</field>
+            <field name="arch" type="xml">
+                  <search string="Census">
+                      <field name="id_number" string="By Identification Number"/>
+                      <field name="name" string="By Citizen Name"/>
+                      <separator/>
+                       <filter name ="Male" icon="terp-document-new" domain="[('gender','=','male')]" string="Mens"/>
+                       <filter name ="Female" icon="terp-dolar" domain="[('gender','=','female')]" string="Girls"/>
+
+                 <group expand="1" string="Group By">
+                        <filter name= "City" string="City" icon="terp-personal" domain="[]" context="{'group_by':'city'}"/>
+                        <filter name= "Nationality" string="Nationality" icon="terp-personal+" domain="[]" context="{'group_by':'nationality'}"/>
+                        <filter name="Age" string="Age" icon="terp-personal" domain="[]" context="{'group_by':'age'}"/>
+                        <filter name="Working" string="Working" icon="terp-go-month" domain="[]" context="{'group_by':'citizen_state'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+		
+	
+
+		<!-- To connect Tree and Form and kanban for the census -->
+		
+		<record id="action_census_entry" model="ir.actions.act_window">
+            <field name="name">Census</field>
+            <field name="res_model">census.entry</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field> <!-- kanban, -->
+            <field name="search_view_id" ref="census_entry_view_search"/>
+            <field name="domain">[]</field><!-- ('user_id', '=', uid) -->
+            <field name="view_id" ref="view_census_entry_tree"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to Add population
+              </p><p>
+                people
+              </p>
+            </field>
+        </record>
+
+   <menuitem id="menu_census_entry" action="action_census_entry"
+             parent="main_menu_census" name="Census Entry" sequence="1"/>
+
+	</odoo>
